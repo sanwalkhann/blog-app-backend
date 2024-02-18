@@ -1,15 +1,19 @@
 /* eslint-disable prettier/prettier */
 
+
 import { Module } from '@nestjs/common';
-import { BlogsService } from './blog.service';
-import { BlogsController } from './blog.controller';
+import { BlogController } from './blog.controller';
+import { BlogService } from './blog.service';
 import { BlogSchema } from './schemas/blog.schema';
+import { AuthModule } from 'src/auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JwtService } from '@nestjs/jwt';
 
 @Module({
-  imports:[MongooseModule.forFeature([{name:'Blog',schema:BlogSchema}])],
-  providers: [BlogsService,JwtService],
-  controllers: [BlogsController]
+  imports: [
+    AuthModule,
+    MongooseModule.forFeature([{ name: 'Blog', schema: BlogSchema }]),
+  ],
+  controllers: [BlogController],
+  providers: [BlogService],
 })
-export class BlogsModule {}
+export class BlogModule {}

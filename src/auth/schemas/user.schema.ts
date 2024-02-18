@@ -1,34 +1,31 @@
 /* eslint-disable prettier/prettier */
-
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import {  HydratedDocument, Schema as MongooseSchema } from 'mongoose';
-import { Blog } from 'src/blog/schemas/blog.schema';
+import { ApiProperty } from '@nestjs/swagger';
 
-
-export type UserDocument = HydratedDocument<User>
-
-export enum UserRole {
-  Admin = 'admin',
-  Writer = 'writer',
-  Guest = 'guest',
+export enum Role {
+  ADMIN = 'Admin',
+  WRITER = 'Writer',
+  USER = 'User',
 }
 
-@Schema()
+@Schema({
+  timestamps: true,
+})
 export class User {
-  @Prop({})
-  username: string;
+  @ApiProperty({ description: 'The name of the user' })
+  @Prop()
+  name: string;
 
-  @Prop({ })
+  @ApiProperty({ description: 'The email of the user' })
+  @Prop()
   email: string;
 
-  @Prop({  })
+  @ApiProperty({ description: 'The password of the user' })
+  @Prop()
   password: string;
 
-  @Prop({})
-  role: UserRole;
-
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Blog' })
-  blogId: [Blog]; 
+  @Prop({ enum: Role, default: Role.USER })
+  role: Role;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

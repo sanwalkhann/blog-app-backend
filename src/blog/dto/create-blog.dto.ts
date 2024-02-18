@@ -1,15 +1,11 @@
 /* eslint-disable prettier/prettier */
 
-import { CategoryDocument } from "src/category/schemas/category.schema"
+import { Category } from 'src/category/schemas/category.schema';
 
-
-
-
-
-
-export class CreateBlogDto{
-    readonly title:string
-    readonly content:string
-    readonly createdAt:Date
-    readonly category:CategoryDocument
+export class CreateBlogDto {
+  readonly title: string;
+  readonly content: string;
+  readonly category: Category;
+  user: string;
 }
+

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import { UserRole } from "../schemas/user.schema"
+import { Role } from "../schemas/user.schema"
 
 
 export class CreateUserDto{
@@ -9,6 +9,6 @@ export class CreateUserDto{
     readonly email:string
     readonly password:string
     readonly blogId:Array<string>
-    readonly role:UserRole
+    readonly role:Role
 }
 
